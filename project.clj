@@ -1,6 +1,8 @@
-(defproject data-frame "0.1.0"
+(defproject data-frame "0.1.1"
   :description "Use your re-frame with DataScript as a data storage"
-  :url "http://example.com/FIXME"
+  :url "https://github.com/denistakeda/data-frame"
   :license {:name "MIT"
             :url "https://opensource.org/licenses/MIT"}
-  :dependencies [[org.clojure/clojure "1.8.0"]])
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [re-frame "0.9.4"]
+                 [posh "0.5.5"]])
