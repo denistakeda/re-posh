@@ -7,6 +7,6 @@
      event-name
      (into [] (concat [(r/inject-cofx :ds)] interceptors))
      (fn [{:keys [ds]} signal]
-       { :transact (handler @ds signal) })))
+       { :transact (handler ds signal) })))
   ([event-name handler]
    (reg-event-ds event-name [] handler)))

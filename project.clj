@@ -1,4 +1,4 @@
-(defproject data-frame "0.1.1"
+(defproject data-frame "0.1.2"
   :description "Use your re-frame with DataScript as a data storage"
   :url "https://github.com/denistakeda/data-frame"
   :license {:name "MIT"
