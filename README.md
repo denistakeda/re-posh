@@ -1,8 +1,6 @@
 # data-frame
 
-DataFrame is a ClojureScript library that allows you to use [re-frame](https://github.com/Day8/re-frame) with [DataScript](https://github.com/tonsky/datascript) as a data storage. It uses [posh](https://github.com/mpdairy/posh) under the hood.
-I like the refined beauty of re-frame but it forces me to optimaze my store and give it certan shape. At the same time I like freedom and power of DataScript and Datalog. So why not to use them together. 
-I want to write subscriptions on Datalog and events as a transaction. If you want the same, welcome.
+DataFrame is a ClojureScript library that allows you to use [re-frame](https://github.com/Day8/re-frame) with [DataScript](https://github.com/tonsky/datascript) as a data storage. It uses [posh](https://github.com/mpdairy/posh) under the hood.  I like the refined beauty of re-frame but it forces me to optimize my store and give it certain shape. At the same time, I like freedom and power of DataScript and Datalog. So why not to use them together. I want to write subscriptions on Datalog and events as a transaction. If you want the same, welcome.
 
 ## Usage
 
