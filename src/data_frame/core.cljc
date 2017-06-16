@@ -1,10 +1,10 @@
-(ns data-frame.core
+(ns re-posh.core
   (:require
-    [data-frame.db :as db]
-    [data-frame.subs :as subs]
-    [data-frame.events :as events]
-    [data-frame.effects]
-    [data-frame.coeffects]))
+    [re-posh.db :as db]
+    [re-posh.subs :as subs]
+    [re-posh.events :as events]
+    [re-posh.effects]
+    [re-posh.coeffects]))
 
 (def connect! db/connect!)
 (def reg-query-sub subs/reg-query-sub)

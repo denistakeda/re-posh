@@ -1,6 +1,6 @@
-[![Clojars Project](https://img.shields.io/clojars/v/data-frame.svg)](https://clojars.org/data-frame)
+[![Clojars Project](https://img.shields.io/clojars/v/re-posh.svg)](https://clojars.org/re-posh)
 
-# data-frame
+# re-posh
 
 DataFrame is a ClojureScript library that allows you to use [re-frame](https://github.com/Day8/re-frame), a [reagent](https://github.com/reagent-project/reagent) framework for writing single-page applications with Facebook's [react](https://facebook.github.io/react/), along with [DataScript](https://github.com/tonsky/datascript), an immutable database and [Datalog](http://www.learndatalogtoday.org/) query engine for application state management and data flow.
 
@@ -16,7 +16,7 @@ Require DataFrame in your app:
 ```clojure
 (ns example
   (:require [reagent.core :as r]
-            [data-frame.core :refer [connect! reg-query-sub reg-pull-sub reg-event-ds]]
+            [re-posh.core :refer [connect! reg-query-sub reg-pull-sub reg-event-ds]]
             [datascript.core :as d]))
 ```
 
@@ -28,7 +28,7 @@ Connect your DataScript database to DataFrame:
 (ns example.db
   (:require
     [datascript.core    :as d]
-    [data-frame.core    :refer [connect!]]))
+    [re-posh.core       :refer [connect!]]))
 
 (def conn (d/create-conn))
 (connect! conn)

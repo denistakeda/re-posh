@@ -1,4 +1,4 @@
-(ns data-frame.db
+(ns re-posh.db
   (:require [posh.reagent :as p]))
 
 ;; Basic store. This atom stores another atom
