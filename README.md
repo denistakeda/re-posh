@@ -2,9 +2,9 @@
 
 # re-posh
 
-DataFrame is a ClojureScript library that allows you to use [re-frame](https://github.com/Day8/re-frame), a [reagent](https://github.com/reagent-project/reagent) framework for writing single-page applications with Facebook's [react](https://facebook.github.io/react/), along with [DataScript](https://github.com/tonsky/datascript), an immutable database and [Datalog](http://www.learndatalogtoday.org/) query engine for application state management and data flow.
+`re-posh` is a ClojureScript library that allows you to use [re-frame](https://github.com/Day8/re-frame), a [reagent](https://github.com/reagent-project/reagent) framework for writing single-page applications with Facebook's [react](https://facebook.github.io/react/), along with [DataScript](https://github.com/tonsky/datascript), an immutable database and [Datalog](http://www.learndatalogtoday.org/) query engine for application state management and data flow.
 
-DataFrame uses [posh](https://github.com/mpdairy/posh) to combine reagent's component state management (including automatic component re-rendering when the underlying state changes) with DataScript's very rich data management and querying capabilities.
+`re-posh` uses [posh](https://github.com/mpdairy/posh) to combine reagent's component state management (including automatic component re-rendering when the underlying state changes) with DataScript's very rich data management and querying capabilities.
 
 The end result is a system where the functions that you compose to render your user interface can declaratively be tied to queries that intelligently bind themselves to the data set that forms your application's state. This turns rich/complicated application state management from a creeping problem into a welcomed feature.
 
@@ -12,7 +12,7 @@ You can have the elegance and power of re-frame alongside the flexibility and ex
 
 ## Usage
 
-Require DataFrame in your app:
+Require `re-posh` in your app:
 ```clojure
 (ns example
   (:require [reagent.core :as r]
@@ -22,7 +22,7 @@ Require DataFrame in your app:
 
 ## Connection
 
-Connect your DataScript database to DataFrame:
+Connect your DataScript database to `re-posh`:
 
 ```clojure
 (ns example.db
@@ -88,7 +88,7 @@ Pull subscriptions creates subscription to the entity. `reg-pull-sub` function c
 
  ## Events
 
-DataFrame uses totally the same solution as re-frame `reg-event-db` but with datascript database instead. Function `reg-event-ds` takes event name and event handler. First param for handler is a dereferenced DataScript database. You can do with it whatewer you like, make query or take entities with pull. The second parameter is a signal. Event handler have to return transaction.
+`re-posh` uses totally the same solution as re-frame `reg-event-db` but with datascript database instead. Function `reg-event-ds` takes event name and event handler. First param for handler is a dereferenced DataScript database. You can do with it whatewer you like, make query or take entities with pull. The second parameter is a signal. Event handler have to return transaction.
 
  ```clojure
  (reg-event-ds
@@ -99,7 +99,7 @@ DataFrame uses totally the same solution as re-frame `reg-event-db` but with dat
 
  ## Effects and Co-effects
 
-DataFrame introduce one effect and one co-effect. You can use them as regular re-frame effects and co-effects (in fact they are regular re-frame effects and coeffects)
+`re-posh` introduce one effect and one co-effect. You can use them as regular re-frame effects and co-effects (in fact they are regular re-frame effects and coeffects)
 
 
 ### Transact effect
