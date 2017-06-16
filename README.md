@@ -2,11 +2,11 @@
 
 # data-frame
 
-DataFrame is a ClojureScript library that allows you to use [re-frame](https://github.com/Day8/re-frame), a [reagent](https://github.com/reagent-project/reagent) framework for writing single-page applications with Facebook's [react](https://facebook.github.io/react/), along with [DataScript](https://github.com/tonsky/datascript), an immutable database and [Datalog](http://www.learndatalogtoday.org/) query engine for application state management and data flow. 
+DataFrame is a ClojureScript library that allows you to use [re-frame](https://github.com/Day8/re-frame), a [reagent](https://github.com/reagent-project/reagent) framework for writing single-page applications with Facebook's [react](https://facebook.github.io/react/), along with [DataScript](https://github.com/tonsky/datascript), an immutable database and [Datalog](http://www.learndatalogtoday.org/) query engine for application state management and data flow.
 
-DataFrame uses [posh](https://github.com/mpdairy/posh) to combine reagent's component state management (including automatic component re-rendering when the underlying state changes) with DataScript's very rich data management and querying capabilities. 
+DataFrame uses [posh](https://github.com/mpdairy/posh) to combine reagent's component state management (including automatic component re-rendering when the underlying state changes) with DataScript's very rich data management and querying capabilities.
 
-The end result is a system where the functions that you compose to render your user interface can declaratively be tied to queries that intelligently bind themselves to the data set that forms your application's state. This turns rich/complicated application state management from a creeping problem into a welcomed feature. 
+The end result is a system where the functions that you compose to render your user interface can declaratively be tied to queries that intelligently bind themselves to the data set that forms your application's state. This turns rich/complicated application state management from a creeping problem into a welcomed feature.
 
 You can have the elegance and power of re-frame alongside the flexibility and expressiveness of DataScript and Datalog. You can manage your application's internal state at whatever complexity level you need it to be, from day one.
 
