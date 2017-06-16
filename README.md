@@ -1,4 +1,5 @@
 [![Clojars Project](https://img.shields.io/clojars/v/re-posh.svg)](https://clojars.org/re-posh)
+[![Gitter](https://img.shields.io/gitter/room/thunder-project/thunder.svg?style=flat-square)](https://gitter.im/re-posh/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
 # re-posh
 
