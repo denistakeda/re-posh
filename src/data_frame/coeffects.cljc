@@ -1,7 +1,7 @@
-(ns data-frame.coeffects
+(ns re-posh.coeffects
   (:require
     [re-frame.core :as r]
-    [data-frame.db :refer [store]]
+    [re-posh.db :refer [store]]
     [posh.reagent  :as p]))
 
 (r/reg-cofx

@@ -1,4 +1,4 @@
-(ns data-frame.events
+(ns re-posh.events
   (:require [re-frame.core :as r]))
 
 (defn reg-event-ds

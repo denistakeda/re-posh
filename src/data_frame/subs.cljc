@@ -1,7 +1,7 @@
-(ns data-frame.subs
+(ns re-posh.subs
   (:require
     [re-frame.core :as r]
-    [data-frame.db :refer [store]]
+    [re-posh.db :refer [store]]
     [posh.reagent  :as p]))
 
 (defn reg-query-sub [sub-name query]
