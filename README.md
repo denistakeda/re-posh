@@ -13,6 +13,12 @@ You can have the elegance and power of re-frame alongside the flexibility and ex
 
 ## Usage
 
+Start a re-frame project and include this dependency:
+
+```clj
+[re-posh "0.1.4"]
+```
+
 Require `re-posh` in your app:
 ```clojure
 (ns example
