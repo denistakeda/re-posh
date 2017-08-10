@@ -3,29 +3,29 @@
 
 # re-posh
 
-`re-posh` is a ClojureScript library that empowers you to improve your [re-frame](https://github.com/Day8/re-frame) single-page applications to have a robust and flexible in-page database to manage your application's state. 
+`re-posh` is a ClojureScript library that empowers you to improve your [re-frame](https://github.com/Day8/re-frame) single-page applications to have a robust and flexible in-page database to manage your application's state.
 
 You can also leverage [DatSync](https://github.com/metasoarous/datsync) to have that in-browser app sync to a server running [Datomic](http://www.datomic.com/) or [DataScript](https://github.com/tonsky/datascript) to simply store your data, or for realtime collaboration between multiple clients.
 
-re-frame is a [reactive programming](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754) library for writing single-page apps in ClojureScript 
+re-frame is a [reactive programming](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754) library for writing single-page apps in ClojureScript
  using [Reagent](https://github.com/reagent-project/reagent), which wraps Facebook's popular [React](https://facebook.github.io/react/) library for building component-oriented user interfaces.
 
-[Posh](https://github.com/mpdairy/posh) improves Reagent to allow the declarative binding of user interface components to a local DataScript database. Like Datomic, DataScript supports the powerful `q` and `pull` query API's, and [Datalog](http://www.learndatalogtoday.org/) in general. 
+[Posh](https://github.com/mpdairy/posh) improves Reagent to allow the declarative binding of user interface components to a local DataScript database. Like Datomic, DataScript supports the powerful `q` and `pull` query API's, and [Datalog](http://www.learndatalogtoday.org/) in general.
 
 `re-posh` allows Posh and re-frame to work together by adding support for re-frame specific `subscriptions`, `events`, `effects`, and `co-effects` to Posh.
 
 ## Why?
 
-State management within *any* application, if treated as a secondary concern, can become a creeping problem that becomes a source of difficult-to-debug problems as the app grows in complexity. re-frame offers a solution to that problem by [having a single app-db data structure](https://github.com/Day8/re-frame/blob/master/docs/ApplicationState.md) in the form of a `reagent/atom` as a single source of truth in the app. UI elements subscribe to changes to that structure and create events that mutate that structure. 
- 
- `re-posh` replaces that single `atom` with a full-featured in-memory database. Now, your application's state has sophisticated data management and querying capabilities that defy complexity. UI elements can bind to the db with all of the expressiveness of Datalog, and the app maintains a single source of truth with an *actual* database. 
- 
+State management within *any* application, if treated as a secondary concern, can become a creeping problem that becomes a source of difficult-to-debug problems as the app grows in complexity. re-frame offers a solution to that problem by [having a single app-db data structure](https://github.com/Day8/re-frame/blob/master/docs/ApplicationState.md) in the form of a `reagent/atom` as a single source of truth in the app. UI elements subscribe to changes to that structure and create events that mutate that structure.
+
+ `re-posh` replaces that single `atom` with a full-featured in-memory database. Now, your application's state has sophisticated data management and querying capabilities that defy complexity. UI elements can bind to the db with all of the expressiveness of Datalog, and the app maintains a single source of truth with an *actual* database.
+
 ## Usage
 
 Start a re-frame project and include this dependency:
 
 ```clj
-[re-posh "0.1.4"]
+[re-posh "0.1.5"]
 ```
 
 Require `re-posh` in your app:

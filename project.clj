@@ -1,4 +1,4 @@
-(defproject re-posh "0.1.4"
+(defproject re-posh "0.1.5"
   :description "Use your re-frame with DataScript as a data storage"
   :url "https://github.com/denistakeda/re-posh"
   :license {:name "MIT"
