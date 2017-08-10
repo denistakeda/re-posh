@@ -7,4 +7,4 @@
 (r/reg-cofx
   :ds
   (fn [coeffects _]
-    (assoc coeffects :conn @@store)))
+    (assoc coeffects :ds @@store)))
