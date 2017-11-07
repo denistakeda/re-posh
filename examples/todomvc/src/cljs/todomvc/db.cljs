@@ -5,7 +5,7 @@
 
 (def initial-db [{ :db/id                        -1
                    :app/type                     :type/create-todo-form
-                   :create-todo-form/title        "1234"
+                   :create-todo-form/title        ""
                    :create-todo-form/description  "" }
                  { :db/id            -2
                    :app/type         :type/task

@@ -17,3 +17,12 @@
  :create-todo-form/set-title
  (fn [_ [_ id value]]
    [[:db/add id :create-todo-form/title value]]))
+
+(re-posh/reg-event-ds
+ :create-todo-form/create-todo
+ (fn [_ [_ id value]]
+   [[ :db/add id :create-todo-form/title "" ]
+    { :db/id       -1
+      :app/type    :type/task
+      :task/title  value
+      :task/done?  false}]))
