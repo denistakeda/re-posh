@@ -28,8 +28,14 @@
        (for [task-id @task-ids]
          ^{:key task-id} [task-list-item task-id])])))
 
+(defn server-button []
+  [:button {:class-name "get-entries"
+            :on-click   #(re-frame/dispatch [:retrieve])}
+           "Click Here To Get Entries from the Server!"])
+
 (defn main-panel []
   [:div {:class-name "main-panel"}
    [:h1 "TodoMVC"]
    [create-task-panel]
+   [server-button]
    [task-list]])
