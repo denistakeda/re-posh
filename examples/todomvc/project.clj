@@ -1,10 +1,15 @@
 (defproject todomvc "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.908"]
+                 [cljs-ajax "0.7.3"]
+                 [compojure "1.5.0"]
+                 [ring "1.4.0"]
                  [reagent "0.7.0"]
                  [datascript "0.16.2"]
                  [re-frame "0.10.1"]
                  [re-posh "0.1.5"]]
+
+  :main todomvc.core
 
   :plugins [[lein-cljsbuild "1.1.5"]]
 
@@ -33,8 +38,8 @@
                     :asset-path           "js/compiled/out"
                     :source-map-timestamp true
                     :preloads             [devtools.preload]
-                    :external-config      {:devtools/config {:features-to-install :all}}
-                    }}
+                    :external-config      {:devtools/config {:features-to-install :all}}}}
+
 
     {:id           "min"
      :source-paths ["src/cljs"]
@@ -42,9 +47,9 @@
                     :output-to       "resources/public/js/compiled/app.js"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
-                    :pretty-print    false}}
+                    :pretty-print    false}}]})
 
 
-    ]}
 
-  )
+
+
