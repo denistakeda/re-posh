@@ -1,7 +1,6 @@
 (ns todomvc.subs
-  (:require-macros [reagent.ratom :refer [reaction]])
-  (:require [re-frame.core :as re-frame]
-            [re-posh.core :as re-posh]))
+  (:require
+   [re-posh.core :as re-posh]))
 
 (re-posh/reg-query-sub
  :create-todo-form/id

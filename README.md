@@ -25,29 +25,14 @@ State management within *any* application, if treated as a secondary concern, ca
 Start a re-frame project and include this dependency:
 
 ```clj
-[re-posh "0.1.5"]
+[re-posh "0.1.6"]
 ```
 
 Require `re-posh` in your app:
 ```clojure
 (ns example
-  (:require [reagent.core :as r]
-            [re-posh.core :refer [connect! reg-query-sub reg-pull-sub reg-event-ds]]
-            [datascript.core :as d]))
-```
-
-## Connection
-
-Connect your DataScript database to `re-posh`:
-
-```clojure
-(ns example.db
   (:require
-    [datascript.core    :as d]
-    [re-posh.core       :refer [connect!]]))
-
-(def conn (d/create-conn))
-(connect! conn)
+    [re-posh.core :refer [reg-query-sub reg-pull-sub reg-event-ds subscribe dispatch]]))
 ```
 
 ## Subscriptions
@@ -124,9 +109,9 @@ This effect commit transaction into the DataScript database
 
 ```clojure
 (ns example.events
-   (:require [re-frame.core :as r]))
+   (:require [re-posh.core :as re-posh]))
 
-(r/reg-event-fx
+(re-posh/reg-event-fx
    :my-event
    (fn [cofx [_ id k v]]
       {:transact [[:db/add id k v]]})) ;; return datascript transaction
@@ -138,11 +123,11 @@ This co-effect provide DataScript database into your event handler
 
 ```clojure
 (ns example.events
-   (:require [re-frame.core :as r]))
+   (:require [re-posh.core :as re-posh]))
 
-(r/reg-event-fx
+(re-posh/reg-event-fx
    :my-event
-   [(r/inject-cofx :ds)] ;; inject coeffect
+   [(re-posh/inject-cofx :ds)] ;; inject coeffect
    (fn [{:keys [ds]} [_ id k v]] ;; ds here is the DataScript database
       {:transact [[:db/add id k v]]}))
 ```
@@ -157,7 +142,6 @@ Pull requests are welcome. Email me on <denis.takeda@gmail.com> if you have any 
 
  ## License
 
- Copyright © 2017 Denis Krivosheev
+ Copyright © 2018 Denis Krivosheev
 
  Distributed under the MIT License
-
