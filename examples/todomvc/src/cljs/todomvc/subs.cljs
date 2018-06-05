@@ -9,15 +9,23 @@
     :query '[:find ?id .
              :where [?id :app/type :type/create-todo-form]]}))
 
-(re-posh/reg-pull-sub
-:create-todo-form
-'[*])
+(re-posh/reg-sub
+ :create-todo-form
+ (fn [_ [_ id]]
+   {:type    :pull
+    :pattern '[*]
+    :id      id}))
 
-(re-posh/reg-query-sub
-:task-ids
-'[ :find  [?tid ...]
-  :where [?tid :app/type :type/task] ])
+(re-posh/reg-sub
+ :task-ids
+ (fn [_ _]
+   {:type :query
+    :query '[:find  [?tid ...]
+             :where [?tid :app/type :type/task]]}))
 
-(re-posh/reg-pull-sub
-:task
-'[*])
+(re-posh/reg-sub
+ :task
+ (fn [_ [_ id]]
+   {:type    :pull
+    :pattern '[*]
+    :id      id}))
