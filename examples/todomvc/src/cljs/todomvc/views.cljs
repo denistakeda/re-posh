@@ -2,15 +2,16 @@
   (:require [re-posh.core :refer [subscribe dispatch]]))
 
 (defn create-task-panel []
-  (let [form-id (subscribe [:create-todo-form/id])
-        form (subscribe [:create-todo-form @form-id])]
+  (let [form (subscribe [:create-todo-form])]
     (fn []
-      [:div.create-tast-panel
-       [:input {:type "text"
-                :value (:create-todo-form/title @form)
-                :on-change #(dispatch [:create-todo-form/set-title @form-id (-> % .-target .-value)])}]
-       [:button.create-task-button
-        {:on-click #(dispatch [:create-todo-form/create-todo @form-id (:create-todo-form/title @form)])} "Create"]])))
+      (let [form-id (:db/id @form)]
+        [:div.create-tast-panel
+         [:input
+          {:type "text"
+           :value (:create-todo-form/title @form)
+           :on-change #(dispatch [:create-todo-form/set-title form-id (-> % .-target .-value)])}]
+         [:button.create-task-button
+          {:on-click #(dispatch [:create-todo-form/create-todo form-id (:create-todo-form/title @form)])} "Create"]]))))
 
 (defn task-list-item [id]
   (let [task (subscribe [:task id])]

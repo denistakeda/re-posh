@@ -11,7 +11,8 @@
 
 (re-posh/reg-sub
  :create-todo-form
- (fn [_ [_ id]]
+ (fn [_] [:create-todo-form/id])
+ (fn [[id] _]
    {:type    :pull
     :pattern '[*]
     :id      id}))

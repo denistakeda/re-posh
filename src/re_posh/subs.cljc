@@ -2,6 +2,7 @@
   (:require
    [re-frame.core :as r]
    [re-posh.db :refer [store]]
+   [reagent.ratom :refer-macros [reaction]]
    [posh.reagent  :as p]))
 
 (defmulti execute-sub :type)
@@ -16,12 +17,25 @@
   (p/pull @store pattern id))
 
 (defn reg-sub
-  [sub-name config-fn]
-  (r/reg-sub-raw
-   sub-name
-   (fn [_ params]
-     (let [config (config-fn @@store params)]
-       (execute-sub config)))))
+  ([sub-name config-fn]
+   (r/reg-sub-raw
+    sub-name
+    (fn [_ params]
+      (let [config (config-fn [@@store] params)]
+        (execute-sub config)))))
+  ([sub-name signal-fn config-fn]
+   (r/reg-sub-raw
+    sub-name
+    (fn [_ params]
+      (reaction
+       (let [signals (->> (signal-fn params)
+                          vector
+                          (into []))
+             subscriptions (->> signals
+                                (map r/subscribe)
+                                (map deref))
+             config (config-fn subscriptions params)]
+         @(execute-sub config)))))))
 
 (defn reg-query-sub [sub-name query]
   (reg-sub
