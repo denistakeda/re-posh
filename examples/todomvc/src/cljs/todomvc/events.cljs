@@ -1,7 +1,7 @@
 (ns todomvc.events
-  (:require [re-frame.core :as re-frame]
-            [re-posh.core :as re-posh]
-            [todomvc.db :as db]))
+  (:require
+   [re-posh.core :as re-posh]
+   [todomvc.db :as db]))
 
 (re-posh/reg-event-ds
  :initialize-db
