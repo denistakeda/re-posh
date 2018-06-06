@@ -1,11 +1,10 @@
 (ns todomvc.core
   (:require [reagent.core :as reagent]
             [re-posh.core :as re-posh]
-            [todomvc.events]
+            [todomvc.events :as evt]
             [todomvc.subs]
             [todomvc.views :as views]
             [todomvc.config :as config]))
-
 
 (defn dev-setup []
   (when config/debug?
@@ -17,6 +16,6 @@
                   (.getElementById js/document "app")))
 
 (defn ^:export init []
-  (re-posh/dispatch-sync [:initialize-db])
+  (re-posh/dispatch-sync [::evt/initialize-db])
   (dev-setup)
   (mount-root))
