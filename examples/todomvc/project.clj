@@ -2,7 +2,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.10.238"]
                  [reagent "0.8.1"]
-                 [re-posh "0.1.6"]]
+                 [re-posh "0.2.0"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
 
