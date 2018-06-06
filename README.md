@@ -25,7 +25,7 @@ State management within *any* application, if treated as a secondary concern, ca
 Start a re-frame project and include this dependency:
 
 ```clj
-[re-posh "0.1.6"]
+[re-posh "0.2.0"]
 ```
 
 Require `re-posh` in your app:
