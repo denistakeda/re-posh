@@ -99,8 +99,8 @@
         inputs-fn  (case (count input-args)
                      ;; no `inputs` function provided - give the default
                      0 (fn
-                         ([_] @@store)
-                         ([_ _] @@store))
+                         ([_] nil)
+                         ([_ _] nil))
 
                      ;; a single `inputs` fn
                      1 (let [f (first input-args)]
@@ -130,7 +130,7 @@
      (fn [_ params]
        (if (= (count input-args) 0)
          ;; if there is no inputs-fn provided (or sugar version) don't wrap anything in reaction,
-         ;; just return posh's query of pull
+         ;; just return posh's query or pull
          (execute-sub (config-fn @@store params))
          (reaction
           (let [inputs (inputs-fn params)
