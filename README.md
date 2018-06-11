@@ -25,7 +25,7 @@ State management within *any* application, if treated as a secondary concern, ca
 Start a re-frame project and include this dependency:
 
 ```clj
-[re-posh "0.1.6"]
+[re-posh "0.2.0"]
 ```
 
 Require `re-posh` in your app:
@@ -38,6 +38,104 @@ Require `re-posh` in your app:
 ## Subscriptions
 
 You can subscribe to the DataScript database with a query subscription or with a pull subscription.
+
+### Basic subscription
+
+The basic mechanism for subscibing to a DataScript database is `reg-sub` function. It uses the same mechanism and API as [re-frame's subscribe](https://github.com/Day8/re-frame/blob/master/src/re_frame/subs.cljc#L200-L354). You can find the working example at [todomvc](https://github.com/denistakeda/re-posh/blob/master/examples/todomvc/src/cljs/todomvc/subs.cljs) project.
+
+For a given `query-id` function `reg-sub` register a `config` function and input `signals`.
+
+There are 2 forms of configs that can be returned by config function:
+
+For query:
+```clojure
+{:type      :query
+ :query     '[:find ... where ...]
+ :variables [var1 var2]}
+```
+Variables are optional. Please visit the [datalog query](https://docs.datomic.com/on-prem/query.html) documentation to learn about query syntax.
+
+For pull subscibtion:
+```clojure
+{:type    :pull
+ :pattern '[*]
+ :id      id}
+```
+All fields are required. Please visit the [datomic pull](https://docs.datomic.com/on-prem/pull.html) documentation to learn about pull syntax and patterns.
+
+At an abstract level, a call to `reg-sub` function allows you to register 'the mechanism' to later fulfil a call to `(subscribe [query-id ...])`.
+
+To say that another way, reg-sub allows you to create a template for a node in the signal graph. But note: reg-sub does not cause a node to be created. It simply allows you to register the template from which such a node could be created, if it were needed, sometime later, when the call to `subscribe` is made.
+
+reg-sub needs three things:
+ - a `query-id`
+ - the required inputs for this node
+ - a function that generates config for query or pull for this node
+
+The `query-id` is always the 1st argument to reg-sub and it is typicallya namespaced keyword.
+
+A config function is always the last argument and it has this general form: `(input-signals, query-vector) -> a-value`
+
+What goes in between the 1st and last args can vary, but whatever is there will define the input signals part of the template, and, as a result, it will control what values the config functions gets as a first argument. There's 3 ways this function can be called - 3 ways to supply input signals:
+
+1. No input signals given:
+
+```clojure
+(reg-sub
+ :query-id
+ a-config-fn)   ;; (fn [db v]  ... a-value)
+```
+
+The node's input signal defaults to datascript database, and the value within `ds` is given as the 1st argument to the computation function.
+
+2. A signal function is supplied:
+
+```clojure
+(reg-sub
+ :query-id
+ signal-fn     ;; <-- here, the form is (fn [db v] ... signal | [signal])
+ config-fn)
+```
+
+When a node is created from the template, the `signal-fn` will be called and it is expected to return the input signal(s) as either a singleton, if there is only one, or a sequence if there are many. The values from the nominated signals will be supplied as the 1st argument to the config function - either a singleton or sequence, paralleling the structure returned by the signal function.
+Here, is an example signal-fn, which returns a vector of input signals.
+
+```clojure
+(fn [query-vec]
+ [(subscribe [:a-sub])
+  (subscribe [:b-sub])])
+```
+
+For that signal function, the config function must be written to expect a vector of values for its first argument.
+
+```clojure
+(fn [[a b] _] ....)
+```
+
+If the signal function was simpler and returned a singleton, like this:
+
+```clojure
+(fn [query-vec dynamic-vec]
+  (subscribe [:a-sub]))
+```
+
+then the config function must be written to expect a single value as the 1st argument:
+```clojure
+(fn [a _] ...)
+```
+
+3. Syntax Sugar
+
+```clojure
+(reg-sub
+  :a-b-sub
+  :<- [:a-sub]
+  :<- [:b-sub]
+  (fn [[a b] [_]] {:a a :b b}))
+```
+
+This 3rd variation is syntactic sugar for the 2nd. Pairs are supplied instead of an `input signals` functions. Each pair starts with a `:<-` and a subscription
+
 
 ### Query subscription
 
@@ -66,7 +164,7 @@ Every parameter in a signal will be pass as param to the query
    :task-ids
    '[ :find  [?tid ...]
       :in $ ?param-1 ?param-2
-      :where ...
+      :where ... ]
 
 (let [task-ids (subscribe [:task-ids param-1 param-2])]
    ...)
@@ -85,7 +183,30 @@ Pull subscriptions creates subscription to the entity. `reg-pull-sub` function c
 
  (let [entity-id 123
        entity    (subscribe [:sub-name entity-id])])
- ```
+```
+
+### Combining subscriptions
+
+It's often the case that combining of several subscriptions (espetially query and pull subscriptions) required. Unfortunatelly `re-posh` doesn't support combining them inside query. But there is another way. The classical example is when we have a query that returns some object id and we needs the whole object (pull). Here is how can we do that:
+
+```clojure
+(reg-sub
+ :configuration-form-id
+ (fn [_ _]
+  {:type  :query
+   :query '[:find ?id .
+            :where :app/type :type/configuration-form]}))
+
+(reg-sub
+ :configuration-form
+ :<- [:configuration-form-id]
+ (fn [form-id _]
+  {:type    :pull
+   :pattern '[*]
+   :id      form-id}))
+```
+
+In this example two queries are generated. The first one is independent. It returns the id of required object. The second one depends of the first one. It takes the object id as param and returns the whole object.
 
  ## Events
 

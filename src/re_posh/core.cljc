@@ -8,6 +8,7 @@
 
 (def reg-query-sub subs/reg-query-sub)
 (def reg-pull-sub subs/reg-pull-sub)
+(def reg-sub subs/reg-sub)
 (def reg-event-ds events/reg-event-ds)
 
 ;; Reexport re-frame functions
