@@ -25,7 +25,7 @@ State management within *any* application, if treated as a secondary concern, ca
 Start a re-frame project and include this dependency:
 
 ```clj
-[re-posh "0.2.0"]
+[re-posh "0.3.0"]
 ```
 
 Require `re-posh` in your app:
@@ -33,6 +33,19 @@ Require `re-posh` in your app:
 (ns example
   (:require
     [re-posh.core :refer [reg-query-sub reg-pull-sub reg-event-ds subscribe dispatch]]))
+```
+
+## Connection
+
+Connect your DataScript database to `re-posh`:
+```clojure
+(ns example.db
+  (:require
+    [datascript.core    :as d]
+    [re-posh.core       :refer [connect!]]))
+
+(def conn (d/create-conn))
+(connect! conn)
 ```
 
 ## Subscriptions

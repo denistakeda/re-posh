@@ -1,4 +1,6 @@
-(ns todomvc.db)
+(ns todomvc.db
+  (:require [datascript.core :as datascript]
+            [re-posh.core :as re-posh]))
 
 (def initial-db
   [{:db/id                        -1
@@ -15,3 +17,6 @@
     :task/title       "Have a coffe"
     :task/description "Just relax"
     :task/done?       false}])
+
+(def conn (datascript/create-conn))
+(re-posh/connect! conn)

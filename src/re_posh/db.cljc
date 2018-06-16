@@ -1,17 +1,13 @@
 (ns re-posh.db
   (:require
-   [posh.reagent :as p]
-   [datascript.core :as datascript]))
+   [posh.reagent :as p]))
 
 ;; Basic store. This atom stores another atom
 ;; @store - datascript connection
 ;; @@store - datascript database
 (def store (atom nil))
 
-(defn- connect! []
+(defn connect! [conn]
   "Connect DataScript store to the re-frame event system"
-  (let [conn (datascript/create-conn)]
-    (p/posh! conn)
-    (reset! store conn)))
-
-(connect!)
+  (p/posh! conn)
+  (reset! store conn))
