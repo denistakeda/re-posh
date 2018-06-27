@@ -64,9 +64,10 @@ For query:
 ```clojure
 {:type      :query
  :query     '[:find ... where ...]
+ :rules [rule1 rule2]
  :variables [var1 var2]}
 ```
-Variables are optional. Please visit the [datalog query](https://docs.datomic.com/on-prem/query.html) documentation to learn about query syntax.
+Rules and variables are optional. Please visit the [datalog query](https://docs.datomic.com/on-prem/query.html) documentation to learn about query syntax.
 
 For pull subscibtion:
 ```clojure
@@ -181,6 +182,20 @@ Every parameter in a signal will be pass as param to the query
 
 (let [task-ids (subscribe [:task-ids param-1 param-2])]
    ...)
+```
+
+You can also pass `reg-query-sub` an extra argument for specifying datalog [rules](https://docs.datomic.com/on-prem/query.html#rules):
+
+
+```clojure
+(reg-query-sub
+  :task-ids
+  '[ :find  ?title ?done
+     :in $ %
+     :where (task _ ?title ?done)]
+  '[ [(task ?tid ?title ?done)
+      [?tid :task/title ?title]
+      [?tid :task/done? ?done]]])
 ```
 
 ### Pull subscription
