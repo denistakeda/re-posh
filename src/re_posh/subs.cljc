@@ -9,8 +9,10 @@
 (defmulti execute-sub :type)
 
 (defmethod execute-sub :query
-  [{:keys [query variables]}]
-  (let [pre-q (partial p/q query @store)]
+  [{:keys [query variables rules]}]
+  (let [pre-q (if rules
+                (partial p/q query @store rules)
+                (partial p/q query @store))]
     (apply pre-q (into [] variables))))
 
 (defmethod execute-sub :pull
@@ -149,19 +151,33 @@
      :in $ $1 $2  ;; <- all variables go here
      :where ...])
 
+  It can take datalog rules as an extra argument:
+
+  (re-posh/reg-query-sub
+   :query-id
+   '[:find ...
+     :in $ % $1 $2  ;; <- rules variable goes in second position after $
+     :where ...]
+   '[[(rule1 ?a ?b) ...]
+     [(rule2 ...) ...]
+     ...])
+
   It's possible to subscibe to this query with
 
   (re-posh/subscribe [:query-id var-1 var-2])
 
   so that variables `var-1` and `var-2` will be automatically sent to `:in` form
   "
-  [sub-name query]
-  (reg-sub
-   sub-name
-   (fn [_ [_ & params]]
-     {:type      :query
-      :query     query
-      :variables params})))
+  ([sub-name query rules]
+   (reg-sub
+    sub-name
+    (fn [_ [_ & params]]
+      {:type      :query
+       :query     query
+       :rules     rules
+       :variables params})))
+  ([sub-name query]
+   (reg-query-sub sub-name query nil)))
 
 (defn reg-pull-sub
   "Syntax sugar for writing pull queries. It allows writing pull subscription
