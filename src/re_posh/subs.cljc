@@ -3,6 +3,7 @@
    [re-frame.core :as r]
    [re-frame.loggers :refer [console]]
    [re-posh.db :refer [store]]
+   [clojure.spec.alpha :as s]
    [reagent.ratom :refer-macros [reaction]]
    [posh.reagent  :as p]))
 
@@ -163,6 +164,9 @@
       :query     query
       :variables params})))
 
+(s/fdef reg-pull-sub
+  :args (s/and (s/cat :sub-name keyword?
+                      :pattern vector?)))
 (defn reg-pull-sub
   "Syntax sugar for writing pull queries. It allows writing pull subscription
   in a very simple way:

@@ -9,6 +9,7 @@
                  [re-frame "0.10.5"]
                  [posh "0.5.5"]]
   :plugins [[lein-doo "0.1.10"]]
+  :profiles {:dev {:dependencies [[org.clojure/test.check "0.9.0"]]}}
   :cljsbuild
   {:builds [{:id "test"
              :source-paths ["src" "test"]
