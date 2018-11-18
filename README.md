@@ -270,6 +270,24 @@ This co-effect provide DataScript database into your event handler
 
 [todomvc](https://github.com/denistakeda/re-posh/tree/master/examples/todomvc)
 
+## Run tests
+
+Install karma and headless chrome
+
+```
+npm install -g karma-cli
+npm install karma karma-cljs-test karma-chrome-launcher --save-dev
+```
+
+And then run your tests
+
+```
+lein clean
+lein doo chrome-headless test once
+```
+
+Please note that [doo](https://github.com/bensu/doo) can be configured to run cljs.test in many JS environments (phantom, chrome, ie, safari, opera, slimer, node, rhino, or nashorn).
+
 ## Contribution
 
 Pull requests are welcome. Email me on <denis.takeda@gmail.com> if you have any questions, suggestions or proposals.
