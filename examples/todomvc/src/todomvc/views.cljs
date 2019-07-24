@@ -8,7 +8,7 @@
 (defn render-create-todo-form [form]
   (let [{id    :db/id
          title :create-todo-form/title} form]
-    [:div.create-tast-panel
+    [:div.create-task-panel
      [:input
       {:type "text"
        :value title
