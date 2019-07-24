@@ -2,25 +2,32 @@
 
 An example application designed to demonstrate basic usage of re-posh framework.
 
-## Development Mode
+## Development
 
-### Run application:
+To get an interactive development environment run:
 
-```
-lein clean
-lein figwheel dev
-```
+    lein fig:build
 
-Figwheel will automatically push cljs changes to the browser.
+This will auto compile and send all changes to the browser without the
+need to reload. After the compilation process is complete, you will
+get a Browser Connected REPL. An easy way to try it is:
 
-Wait a bit, then browse to [http://localhost:3449](http://localhost:3449).
+    (js/alert "Am I connected?")
 
-## Production Build
+and you should see an alert in the browser window.
+
+To clean all compiled files:
+
+	lein clean
+
+To create a production build run:
+
+	lein clean
+	lein fig:min
 
 
-To compile clojurescript to javascript:
+## License
 
-```
-lein clean
-lein cljsbuild once min
-```
+Copyright © 2019 Denis Krivosheev
+
+Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
