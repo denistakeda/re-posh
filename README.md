@@ -200,7 +200,7 @@ Pull subscriptions creates subscription to the entity. `reg-pull-sub` function c
 
 Pull-many subscriptions are similar to pull but take a vector of entity-ids.
 
-```
+```clojure
 (reg-pull-many-sub
    :sub-name
    '[*])
