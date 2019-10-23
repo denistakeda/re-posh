@@ -17,6 +17,10 @@
   [{:keys [pattern id]}]
   (p/pull @store pattern id))
 
+(defmethod execute-sub :pull-many
+  [{:keys [pattern ids]}]
+  (p/pull-many @store pattern ids))
+
 (defn reg-sub
   "For a given `query-id` register a `config` function and input `signals`
 
@@ -183,3 +187,14 @@
      {:type    :pull
       :pattern pattern
       :id      id})))
+
+(defn reg-pull-many-sub
+  "Syntax sugar for writing pull-many queries.
+  Same as reg-pull-sub but takes vector of eids under key :ids"
+  [sub-name pattern]
+  (reg-sub
+   sub-name
+   (fn [_ [_ ids]]
+     {:type    :pull-many
+      :pattern pattern
+      :ids     ids})))
