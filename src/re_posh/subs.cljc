@@ -190,7 +190,17 @@
 
 (defn reg-pull-many-sub
   "Syntax sugar for writing pull-many queries.
-  Same as reg-pull-sub but takes vector of eids under key :ids"
+  Same as reg-pull-sub but takes vector of eids under key :ids
+
+  (reg-pull-many-sub
+   :things
+   '[*])
+
+  It's possible to subscribe to this pull-many query with
+
+  (re-posh/subscribe [:things ids])
+
+  Where ids is a sequence of entity ids"
   [sub-name pattern]
   (reg-sub
    sub-name

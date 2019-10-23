@@ -253,7 +253,7 @@ Another example to show usage of `pull-many` from a query that returns several e
    :ids      (reduce into [] entity-ids)}))
 ```
 
-Note the `(reduce ...)` & recall that the query returns its results in form `#{[1] [2] ...}`, but the pull-many sub expects a vector of entity-ids.
+Note the `(reduce ...)` & recall that the query returns its results in form `#{[1] [2] ...}`, but the pull-many sub expects a sequence of entity-ids.
 
  ## Events
 
