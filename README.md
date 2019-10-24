@@ -10,7 +10,7 @@ You can also leverage [DatSync](https://github.com/metasoarous/datsync) to have 
 re-frame is a [reactive programming](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754) library for writing single-page apps in ClojureScript
  using [Reagent](https://github.com/reagent-project/reagent), which wraps Facebook's popular [React](https://facebook.github.io/react/) library for building component-oriented user interfaces.
 
-[Posh](https://github.com/mpdairy/posh) improves Reagent to allow the declarative binding of user interface components to a local DataScript database. Like Datomic, DataScript supports the powerful `q` and `pull` query API's, and [Datalog](http://www.learndatalogtoday.org/) in general.
+[Posh](https://github.com/denistakeda/posh) improves Reagent to allow the declarative binding of user interface components to a local DataScript database. Like Datomic, DataScript supports the powerful `q` and `pull` query API's, and [Datalog](http://www.learndatalogtoday.org/) in general.
 
 `re-posh` allows Posh and re-frame to work together by adding support for re-frame specific `subscriptions`, `events`, `effects`, and `co-effects` to Posh.
 
@@ -85,7 +85,7 @@ reg-sub needs three things:
  - the required inputs for this node
  - a function that generates config for query or pull for this node
 
-The `query-id` is always the 1st argument to reg-sub and it is typicallya namespaced keyword.
+The `query-id` is always the 1st argument to reg-sub and it is typically a namespaced keyword.
 
 A config function is always the last argument and it has this general form: `(input-signals, query-vector) -> a-value`
 
@@ -198,6 +198,19 @@ Pull subscriptions creates subscription to the entity. `reg-pull-sub` function c
        entity    (subscribe [:sub-name entity-id])])
 ```
 
+Pull-many subscriptions are similar to pull but take a vector of entity-ids.
+
+```clojure
+(reg-pull-many-sub
+   :sub-name
+   '[*])
+
+ ;; Usage
+
+ (let [entity-id 123
+       entity    (subscribe [:sub-name [eids])])
+```
+
 ### Combining subscriptions
 
 It's often the case that combining of several subscriptions (espetially query and pull subscriptions) required. Unfortunatelly `re-posh` doesn't support combining them inside query. But there is another way. The classical example is when we have a query that returns some object id and we needs the whole object (pull). Here is how can we do that:
@@ -220,6 +233,27 @@ It's often the case that combining of several subscriptions (espetially query an
 ```
 
 In this example two queries are generated. The first one is independent. It returns the id of required object. The second one depends of the first one. It takes the object id as param and returns the whole object.
+
+Another example to show usage of `pull-many` from a query that returns several entity-ids.
+
+```clojure
+(reg-sub
+ :todo-ids
+ (fn [_ _]
+  {:type  :query
+   :query '[:find ?id
+            :where [?id :item/type :type/todo]}))
+
+(reg-sub
+ :todos
+ :<- [:todo-ids]
+ (fn [entity-ids _]
+  {:type    :pull-many
+   :pattern '[*]
+   :ids      (reduce into [] entity-ids)}))
+```
+
+Note the `(reduce ...)` & recall that the query returns its results in form `#{[1] [2] ...}`, but the pull-many sub expects a sequence of entity-ids.
 
  ## Events
 
@@ -276,6 +310,6 @@ Pull requests are welcome. Email me on <denis.takeda@gmail.com> if you have any 
 
  ## License
 
- Copyright © 2018 Denis Krivosheev
+ Copyright © 2019 Denis Krivosheev
 
  Distributed under the MIT License
