@@ -9,6 +9,13 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
+.cljs_node_repl
+node_modules
+out
+package-lock.json
+resources
+
+
 
 /examples/todomvc/pom.xml
 /examples/todomvc/*jar
@@ -27,3 +34,4 @@ pom.xml.asc
 /examples/todomvc/resources/public/js/
 /examples/todomvc/.cljs_rhino_repl/
 /examples/todomvc/figwheel_server.log
+/examples/todomvc/.lein-failures

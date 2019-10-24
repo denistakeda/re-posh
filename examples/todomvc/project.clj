@@ -7,9 +7,10 @@
   :min-lein-version "2.9.0"
 
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.10.339"]
-                 [reagent "0.8.1"]
-                 [re-posh "0.3.0"]]
+                 [org.clojure/clojurescript "1.10.520"]
+                 [reagent "0.9.0-rc2"]
+                 [re-posh "0.3.1"]
+                 [datascript "0.18.7"]]
 
   :source-paths ["src"]
 

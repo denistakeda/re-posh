@@ -24,9 +24,8 @@ State management within *any* application, if treated as a secondary concern, ca
 
 Start a re-frame project and include this dependency:
 
-```clj
-[re-posh "0.3.0"]
-```
+[![Clojars Project](https://clojars.org/re-posh/latest-version.svg)](https://clojars.org/re-posh)
+
 
 Require `re-posh` in your app:
 ```clojure
