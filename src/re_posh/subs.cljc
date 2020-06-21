@@ -138,7 +138,7 @@
          (execute-sub (config-fn @@store params))
          (reaction
           (let [inputs (inputs-fn params)
-                signals (if (list? inputs)
+                signals (if (seq? inputs)
                           (map deref inputs)
                           (deref inputs))]
             @(execute-sub (config-fn signals params)))))))))
