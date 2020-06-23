@@ -207,7 +207,7 @@ Pull-many subscriptions are similar to pull but take a vector of entity-ids.
  ;; Usage
 
  (let [entity-id 123
-       entity    (subscribe [:sub-name [eids])])
+       entity    (subscribe [:sub-name [eids]])])
 ```
 
 ### Combining subscriptions
@@ -241,7 +241,7 @@ Another example to show usage of `pull-many` from a query that returns several e
  (fn [_ _]
   {:type  :query
    :query '[:find ?id
-            :where [?id :item/type :type/todo]}))
+            :where [?id :item/type :type/todo]]}))
 
 (reg-sub
  :todos
@@ -309,6 +309,6 @@ Pull requests are welcome. Email me on <denis.takeda@gmail.com> if you have any 
 
  ## License
 
- Copyright © 2019 Denis Krivosheev
+ Copyright © 2020 Denis Krivosheev
 
  Distributed under the MIT License
