@@ -5,6 +5,6 @@
             :url "https://opensource.org/licenses/MIT"}
   :dependencies [[org.clojure/clojure "1.9.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
-                 [datascript "0.18.7" :scope "provided"]
-                 [re-frame "0.10.7"]
+                 [datascript/datascript "0.18.7" :scope "provided"]
+                 [re-frame/re-frame "0.10.7"]
                  [denistakeda/posh "0.5.7"]])
