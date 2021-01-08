@@ -67,7 +67,7 @@ For query:
 ```
 Variables are optional. Please visit the [datalog query](https://docs.datomic.com/on-prem/query.html) documentation to learn about query syntax.
 
-For pull subscibtion:
+For pull subscription:
 ```clojure
 {:type    :pull
  :pattern '[*]
