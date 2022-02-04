@@ -11,6 +11,7 @@
 (defmethod execute-sub :query
   [{:keys [query variables]}]
   (let [pre-q (partial p/q query @store)]
+    (js/console.log "executing in store: " @store)
     (apply pre-q (into [] variables))))
 
 (defmethod execute-sub :pull
